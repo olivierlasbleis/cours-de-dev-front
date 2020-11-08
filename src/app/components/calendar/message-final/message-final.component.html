@@ -1,0 +1,27 @@
+
+<div class="card">
+    <div class="card-header">
+        {{header}}
+        <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="card-body">
+        <div class = "col blockquote blockquote-white-perso m-1 cadreComment">
+            
+                {{message}}
+            
+            
+            <footer class="blockquote-footer">
+                {{footer}}
+            
+            </footer>
+            <div class="modal-footer d-flex justify-content-between">
+                <button ngbAutofocus (click) = "ok()" class="btn btn-success">
+                   OK
+                </button>
+            </div>
+        </div>
+        
+    </div>
+</div>

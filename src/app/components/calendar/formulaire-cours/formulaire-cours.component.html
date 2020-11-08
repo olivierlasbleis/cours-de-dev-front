@@ -1,0 +1,55 @@
+
+
+
+
+<form class="example-form" novalidate (ngSubmit)="buy()" [formGroup]="stripeForm" #f="ngForm">
+  
+  <div class="card">
+    <div class="card-header">
+      Informations sur l'apprenant :
+      <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+    </button>
+    </div>
+    <div class="card-body">
+      <div class = "col blockquote blockquote-white-perso m-1 cadreComment">
+        <mat-form-field class="example-full-width m-3" >
+          <mat-label>Nom</mat-label>
+          <input matInput class="form-control" type="text" formControlName="nom" [(ngModel)] = "commandeDto.clientDto.nom">
+        </mat-form-field>
+      
+        <mat-form-field class="example-full-width m-3" >
+          <mat-label>Prénom</mat-label>
+          <input matInput class="form-control" type="text" formControlName="prenom" [(ngModel)] = "commandeDto.clientDto.prenom">
+        </mat-form-field>
+      
+        <mat-form-field class="example-full-width m-3" >
+          <mat-label>Numéro de téléphone</mat-label>
+          <input matInput class="form-control" type="text" formControlName="numeroTelephone" [(ngModel)] = "commandeDto.clientDto.numeroTelephone">
+        </mat-form-field>
+      
+        <mat-form-field class="example-full-width m-3"  >
+          <mat-label>e-mail</mat-label>
+          <input matInput class="form-control" type="text" formControlName="email" [(ngModel)] = "commandeDto.clientDto.email">
+        </mat-form-field>
+        <footer class="blockquote-footer">
+          Vous recevrez un mail juste après votre inscription, <br>
+            celui-ci contiendra toutes les explications pour commencer le cours dans de bonnes conditions <br>
+            ainsi qu'un questionnaire me permettant de comprendre vos besoins et d'établir un plan de formation
+            <br>
+          
+        </footer>
+      </div>
+      <div class="modal-footer d-flex justify-content-between">
+        <button mat-button class = "m-3 btn-secondary" (click)="precedent()">Précédent</button>
+        <button ngbAutofocus mat-button class = "m-3 btn-success" (click)="suivant()" [disabled] = "!f.valid">Suivant</button>
+    </div>
+    </div>
+  </div>
+
+  
+
+
+</form>
+
+  

@@ -1,0 +1,49 @@
+<div class="section section-examples" >
+          
+    <div class="container ">
+        
+        
+        <blockquote class="blockquote blockquote-white-perso">
+            
+            <h6>Calendrier de réservation : </h6>
+            <small>
+                Selectionnez les heures qui vous arrangent puis cliquez sur "Réserver"
+            </small>
+            <div class = "row">
+                <div class = "calendrier">
+                <div class = "col case" 
+                
+                *ngFor = "let jourDeCours of listeJoursDeCours">
+                    <div class = "caseJour">
+                        
+                        {{jourDeCours.jourDeLaSemaine}} <br>
+                        {{jourDeCours.date}}
+                        
+                    </div>
+                   
+                    <div  class = "row caseHeure"
+                    [ngStyle]="{'height' : '8%'}"
+                     *ngFor = "let heureDeCours of jourDeCours.listeHeureDeCoursDto">
+        
+                        <div id = "div"
+                        *ngIf = "heureDeCours.etat!='DISPONIBLE'" 
+                        [ngStyle]="{'background-color': 'rgba(50,50,50,0.5)','width' : '100%','height' : '100%'}">
+                        {{heureDeCours.dateHeure}}
+                        </div>
+        
+                        <mat-button-toggle id = "matButtonToggle"
+                        *ngIf = "heureDeCours.etat=='DISPONIBLE'" value="bold" 
+                        (click)="selectionner(heureDeCours)">{{heureDeCours.dateHeure}}</mat-button-toggle>
+                        
+                    </div>
+                </div>
+                </div>
+            </div>
+           
+                <button mat-button class = "m-3 btn-success truc-a-centrer" (click)="validerEtPayer()"> Réserver </button>
+                
+        </blockquote>
+    </div>
+   
+</div>
+

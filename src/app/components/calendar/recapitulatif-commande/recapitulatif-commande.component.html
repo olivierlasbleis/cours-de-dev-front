@@ -1,0 +1,26 @@
+
+
+<div class="card">
+    <div class="card-header">
+      Récapitulatif de votre commande :
+      <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+    </button>
+    </div>
+    <div class="card-body"  >
+        <div class = "col blockquote blockquote-white-perso m-1 cadreComment">
+            <p *ngFor = "let description of commande.recapitulatifCommandeDto.listeDescriptionCommandeDto">
+                {{description}}
+            </p>
+            <footer class="blockquote-footer">
+                PRIX TOTAL : {{commande.recapitulatifCommandeDto.prix / 100}}€
+            </footer>
+        </div>
+        <div  class="modal-footer d-flex justify-content-between">
+            <button mat-button class = "m-3 btn-secondary" (click)="annuler()">Annuler</button>
+            <button ngbAutofocus mat-button class = "m-3 btn-success" (click)="suivant()">Suivant</button>
+        </div>
+    </div>
+    
+   
+</div>

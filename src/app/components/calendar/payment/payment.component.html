@@ -1,0 +1,36 @@
+<form novalidate (ngSubmit)="buy()" [formGroup]="stripeForm" #f="ngForm">
+    <div class="card">
+        <div class="card-header">
+        Informations de paiement :
+        <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        </div>
+        <div class="card-body"  >
+            <div class = "col blockquote blockquote-white-perso m-1 cadreComment">
+                
+                <mat-form-field class="example-full-width m-3">
+                <mat-label>Nom du titulaire de la carte</mat-label>
+                <input matInput class="form-control" type="text" formControlName="nomTitulaireCarte">
+                </mat-form-field>
+            
+            <div id="card-element" class="field "></div>
+            <div *ngIf="error" class="alert alert-danger">
+                {{error}}
+            </div>
+            </div>
+            <div class="modal-footer d-flex justify-content-between">
+                <button mat-button class = "m-3 btn-success" (click)="annuler()"  *ngIf = "!paiementEnCours">
+                    Précédent
+                </button>
+                <button ngbAutofocus type="submit" class="btn btn-success" [disabled]="!f.valid"  *ngIf = "!paiementEnCours">
+                    Valider informations bancaires et continuer
+                </button>
+                <mat-spinner *ngIf = "paiementEnCours"></mat-spinner>
+            </div>
+        </div>
+    </div>
+</form>
+  
+    
+  

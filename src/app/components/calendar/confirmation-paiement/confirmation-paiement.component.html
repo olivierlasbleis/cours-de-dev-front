@@ -1,0 +1,25 @@
+<div class="card">
+    <div class="card-header">
+      Confirmation du paiement :
+      <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+    </button>
+    </div>
+    <div class="card-body"  >
+        <div class = "col blockquote blockquote-white-perso m-1 cadreComment">
+            <h5>Informations bancaires du paiement : </h5>
+             <p><b>ID:</b> {{id}}</p>
+            <p><b>Nom:</b> {{nom}}</p>
+            <p><b>Description:</b> {{description}}</p>
+            <p><b>Prix:</b> {{prix / 100}}€</p>
+            
+        </div>
+        <div class="modal-footer d-flex justify-content-between">
+             <button type="button" class="btn btn-secondary" (click)="cancelar(id)">Annuler le paiement</button>
+             <button type="button" class="btn btn-success" (click)="confirmar(id)">Confirmer le paiement</button>
+           
+        </div>
+    </div>
+    
+   
+</div>
