@@ -19,6 +19,8 @@ export class ConfirmationPaiementComponent implements OnInit, OnDestroy {
   @Input() prix;
   @Input() commande : CommandeDto;
 
+  paiementEnCours : boolean = false;
+
   constructor(
     public jourDeCoursService : JoursDeCoursService,
     public activeModal: NgbActiveModal,
@@ -27,22 +29,23 @@ export class ConfirmationPaiementComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
-    console.log(this.commande)
   }
 
   ngOnDestroy() {
-    console.log(this.commande)
   }
 
   confirmar(id: string): void {
+    this.paiementEnCours = true;
+    this.commande.idPaiementStripe = id;
     this.paymentService.confirmer(id, this.commande).subscribe(
       data => {
-        this.openMessage('Confirmation',
-        'le paiement a été confirmé ',
-         'identifiant' + data[`id`]);
+        this.openMessage('Confirmation du paiement',
+        'Merci pour votre commande !', 
+        'Vous devriez recevoir d\'ici quelques secondes un mail récapitulatif, ' +
+        'à bientôt en cours !');
          this.jourDeCoursService.getListeJoursDeCours().subscribe(liste => {
           this.jourDeCoursService.subSetListeJourDeCoursDto(liste);
-          
+          this.paiementEnCours = false;
         });
         this.activeModal.close();
       },
@@ -57,12 +60,16 @@ export class ConfirmationPaiementComponent implements OnInit, OnDestroy {
     this.paymentService.annuler(id).subscribe(
       data => {
         this.openMessage('Annulation',
-          'le paiement a été annulé',
-          'identifiant' + data['id'])
+          'Le paiement a été annulé',
+          'Pas de soucis, prenez votre temps pour choisir le bon horaire. ' +
+          'N\'hésitez pas à me contacter au 06 99 89 42 22 ou sur lasbleis.olivier@yahoo.fr si vous avez des questions.' +
+          ' -- identifiant du paiement annulé : ' + data['id'] + ' -- ')
+          this.paiementEnCours = false;
           this.activeModal.close();
       },
       err => {
         console.log(err);
+        this.paiementEnCours = false;
         this.activeModal.close();
       }
     );

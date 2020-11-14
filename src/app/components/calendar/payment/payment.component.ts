@@ -79,13 +79,13 @@ export class PaymentComponent implements OnInit {
             data => {
               this.ouvrirModalConfirmationPaiement(data[`id`], "cours-de-dev.fr", data[`description`], data[`amount`]);
               this.router.navigate(['/']);
+              this.paiementEnCours=false;
             }
           );
           this.error = undefined;
         } else if (result.error) {
           this.error = result.error.message;
         }
-        this.paiementEnCours=false;
       });
       
   }

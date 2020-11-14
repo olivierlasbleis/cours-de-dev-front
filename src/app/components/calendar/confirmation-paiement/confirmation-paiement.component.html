@@ -15,9 +15,9 @@
             
         </div>
         <div class="modal-footer d-flex justify-content-between">
-             <button type="button" class="btn btn-secondary" (click)="cancelar(id)">Annuler le paiement</button>
-             <button type="button" class="btn btn-success" (click)="confirmar(id)">Confirmer le paiement</button>
-           
+             <button *ngIf = "!paiementEnCours" type="button" class="btn btn-secondary" (click)="cancelar(id)">Annuler le paiement</button>
+             <button ngbAutofocus  *ngIf = "!paiementEnCours" type="button" class="btn btn-success" (click)="confirmar(id)">Confirmer le paiement</button>
+             <mat-spinner *ngIf = "paiementEnCours"></mat-spinner>
         </div>
     </div>
     

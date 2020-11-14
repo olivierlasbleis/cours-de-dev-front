@@ -20,7 +20,6 @@ export class RecapitulatifCommandeComponent implements OnInit {
   }
 
   suivant(){
-    console.log(this.commande)
     const modalRef = this.modalService.open(FormulaireCoursComponent);
     modalRef.componentInstance.commandeDto = this.commande;
    

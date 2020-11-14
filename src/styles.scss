@@ -2,3 +2,11 @@
 @import "~bootstrap/scss/bootstrap.scss";
 @import "~angular-calendar/scss/angular-calendar.scss";
 @import '~@angular/material/prebuilt-themes/indigo-pink.css';
+
+.mat-expansion-panel-content > .mat-expansion-panel-body {
+    padding: 0 !important;
+  }
+
+.mat-expansion-panel-header[aria-disabled=true]{
+    color: black !important;
+  }

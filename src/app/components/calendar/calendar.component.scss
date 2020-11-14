@@ -1,3 +1,7 @@
+:root {
+    --widthIsLessThan992px: false;
+  }
+
 .calendar-wrapper {
     max-width: 500px;
     min-width: 200px;
@@ -23,22 +27,45 @@
     border-width: 1px;
     width: 100%;
 }
+.caseHeure{
+    height: 50px;
+}
 
 .calendrier{
     margin: 1em;
     width: 100%;
     border-left: solid;
     border-bottom: solid;
-    display: flex;
     border-width: 1px;
 }
+mat-expansion-panel{
+    width: 14%;
+}
+
+
+.matExpansionPanel{
+    display: flex;
+}
+mat-expansion-panel-header{
+    padding: 0 0;
+    display: inline-block;
+}
+.mat-expansion-panel-header-title{
+    margin-right: 0;
+    display: block;
+}
+mat-panel-title.mat-expansion-panel-header-title{
+    width: 100px;
+}
+
+
 mat-button-toggle{
     height: 100%;
     width: 100%;
 }
 
 .mat-button-toggle-checked{
-    background-color:  rgba(112, 173, 71, 0.9);
+    background-color:  rgba(40, 117, 255, 0.9);
 }
 
 h6{
@@ -57,6 +84,13 @@ h6{
     .caseJour, .case{
         font-size: 9.6px;
     }
+    mat-expansion-panel{
+        width: 100%;
+        
+    }
+    .matExpansionPanel{
+        display: inline;
+    }
 }
 
     /* If the screen size is 601px wide or more, set the font-size of <div> to 80px */
@@ -70,7 +104,13 @@ h6{
         .caseJour, .case{
             font-size: 11.2px;
         }
-        
+        mat-expansion-panel{
+            width: 100%;
+            
+        }
+        .matExpansionPanel{
+            display: inline;
+        }
   }
 
   @media screen and (min-width: 768px) {
@@ -82,6 +122,13 @@ h6{
     }
     .caseJour{
         font-size: 12.8px;
+    }
+    mat-expansion-panel{
+        width: 100%;
+        
+    }
+    .matExpansionPanel{
+        display: inline;
     }
   }
 
@@ -95,6 +142,13 @@ h6{
     .caseJour{
         font-size: 14.4px;
     }
+    mat-expansion-panel{
+        width: 14%;
+        
+    }
+    .matExpansionPanel{
+        display: flex;
+    }
   }
 
   @media screen and (min-width: 1200px) {
@@ -106,6 +160,13 @@ h6{
     }
     .caseJour{
         font-size: 16px;
+    }
+    mat-expansion-panel{
+        width: 14%;
+        
+    }
+    .matExpansionPanel{
+        display: flex;
     }
   }
 

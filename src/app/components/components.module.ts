@@ -10,6 +10,7 @@ import {
 	IgxDialogModule,
     IgxIconModule
  } from "igniteui-angular";
+ import {MatExpansionModule} from '@angular/material/expansion';
  import { HammerModule } from "@angular/platform-browser";
 import { ComponentsComponent } from './components.component';
 import { MonAnnonceComponent } from './mon-annonce/mon-annonce.component';
@@ -52,6 +53,7 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
         MatButtonToggleModule,
         ReactiveFormsModule,
         MatProgressSpinnerModule,
+        MatExpansionModule,
         ToastrModule.forRoot(),
         NgxStripeModule.forRoot('pk_test_51HiGZdJbzYV33WGmUnah8PQME6cv8tIWR5p3JcIfZuNB4AZV6hlCsAL3JXPKNuhpAUgKLkkeeUw5PzRx1jgjaQxE00X08qIiTK')
       ],

@@ -7,7 +7,6 @@ import { StripeService, Elements, Element as StripeElement, ElementsOptions } fr
 import { PaymentIntentDto } from 'app/models/payment-intent-dto';
 import { PaymentService } from 'app/services/payment.service';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { ModalComponent } from 'app/modal/modal.component';
 import { Router } from '@angular/router';
 import { ConfirmationPaiementComponent } from '../confirmation-paiement/confirmation-paiement.component';
 import CommandeDto from 'app/models/Commande';
@@ -29,12 +28,10 @@ export class FormulaireCoursComponent {
 
     
   ngOnInit(): void {
-    console.log(this.commandeDto)
   }
 
 
   suivant(){
-    console.log(this.commandeDto)
     const modalRef = this.modalService.open(PaymentComponent);
     modalRef.componentInstance.commande = this.commandeDto;
     this.activeModal.close();

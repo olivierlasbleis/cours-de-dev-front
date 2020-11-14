@@ -5,7 +5,7 @@ import { PaymentIntentDto } from '../models/payment-intent-dto';
 import { environment } from 'environments/environment';
 import CommandeDto from 'app/models/Commande';
 environment
-const cabecera = {headers: new HttpHeaders({'Content-Type': 'application/json','Access-Control-Expose-Headers': '*'})};
+const cabecera = {headers: new HttpHeaders({'Content-Type': 'application/json'})};
 const urlBackEnd = environment.backendUrl;
 @Injectable({
   providedIn: 'root'

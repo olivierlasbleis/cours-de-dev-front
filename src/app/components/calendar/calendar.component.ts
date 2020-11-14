@@ -1,4 +1,4 @@
-import { Component, Input, OnInit
+import { Component, HostListener, Input, OnInit
 } from '@angular/core';
 import HeureDeCoursDto from 'app/models/HeureDeCours';
 import JourDeCoursDto from 'app/models/JourDeCours';
@@ -17,8 +17,11 @@ import { Subscription } from 'rxjs';
 })
 export class CalendarComponent implements OnInit{
 
+  public innerWidth: any;
+
 
   commande : CommandeDto = { 
+                          idPaiementStripe : "",
                           recapitulatifCommandeDto:{
                                   listeHeuresDeCoursDto:[],
                                   listeDescriptionCommandeDto:[],
@@ -38,6 +41,7 @@ export class CalendarComponent implements OnInit{
   listeJoursDeCours: JourDeCoursDto[];
 
   ngOnInit(){
+    this.innerWidth = window.innerWidth;
     this.jourDeCoursService.getListeJoursDeCours().subscribe(liste => {
       this.jourDeCoursService.subSetListeJourDeCoursDto(liste);
       this.listeJoursDeCoursSub = this.jourDeCoursService.subGetListeJourDeCoursDto.subscribe(
@@ -45,6 +49,34 @@ export class CalendarComponent implements OnInit{
       )
     });
   }
+  @HostListener('window:resize', ['$event'])
+
+  isDisponible(heureDeCours : HeureDeCoursDto) : boolean{
+    
+    if(heureDeCours.etat == "DISPONIBLE"){
+      return true;
+    }else if(heureDeCours.etat == "INDISPONIBLE"){
+      this.supprimerSiExiste(heureDeCours);
+      return false;
+    }
+  }
+
+  isSelected(heureDeCours : HeureDeCoursDto) : boolean{
+    for (let index = 0; index < this.commande.recapitulatifCommandeDto.listeHeuresDeCoursDto.length; index++) {
+      const hDeCours = this.commande.recapitulatifCommandeDto.listeHeuresDeCoursDto[index];
+      if(JSON.stringify(hDeCours) === JSON.stringify(heureDeCours)){
+        return true;
+      }
+    }
+    return false;
+  }
+matExpansionIsOpen():boolean{
+  if (window.innerWidth>992) {
+    return true;
+  }else{
+    return false;
+  }
+}
 
   ngOnDestroy() {
     this.listeJoursDeCoursSub.unsubscribe();
@@ -62,19 +94,19 @@ export class CalendarComponent implements OnInit{
     public jourDeCoursService : JoursDeCoursService) {}
 
   selectionner(heureDeCours : HeureDeCoursDto){
-    if (!this.supprimerSiExiste(heureDeCours)) {
+    if (!this.supprimerSiExiste(heureDeCours) && this.isDisponible(heureDeCours)) {
       this.commande.recapitulatifCommandeDto.listeHeuresDeCoursDto.push(heureDeCours);
       this.commande.recapitulatifCommandeDto.listeDescriptionCommandeDto.push(`le ${heureDeCours.dateJour} à partir de ${heureDeCours.dateHeure}`);
       this.commande.recapitulatifCommandeDto.prix = this.commande.recapitulatifCommandeDto.prix + heureDeCours.prix;
         
     }
-    console.log(this.commande.recapitulatifCommandeDto.listeHeuresDeCoursDto)
-    console.log(this.commande.recapitulatifCommandeDto.listeDescriptionCommandeDto)
   }
 
   supprimerSiExiste(heureDeCours : HeureDeCoursDto) : boolean {
     for (let index = 0; index < this.commande.recapitulatifCommandeDto.listeHeuresDeCoursDto.length; index++) {
       const hDeCours = this.commande.recapitulatifCommandeDto.listeHeuresDeCoursDto[index];
+      let memoireEtat : string = hDeCours.etat;
+      hDeCours.etat = 'INDISPONIBLE';
       if(JSON.stringify(hDeCours) === JSON.stringify(heureDeCours)){
         this.commande.recapitulatifCommandeDto.listeHeuresDeCoursDto.splice(index,1);
         this.commande.recapitulatifCommandeDto.listeDescriptionCommandeDto.splice(index,1);
@@ -82,20 +114,29 @@ export class CalendarComponent implements OnInit{
         
         return true;
       }
+      hDeCours.etat = memoireEtat;
     }
     return false;
   }
 
   ouvrirModal(commande : CommandeDto) {
-    console.log(this.commande)
+
+      for (let j = 0; j < this.listeJoursDeCours.length; j++) {
+        const jDeCours = this.listeJoursDeCours[j];
+        for (let k = 0; k < jDeCours.listeHeureDeCoursDto.length; k++) {
+          const hDeCoursJour = jDeCours.listeHeureDeCoursDto[k];
+          if (hDeCoursJour.etat == 'INDISPONIBLE') {
+            this.supprimerSiExiste(hDeCoursJour);
+          }
+        }
+        
+      }
+      
+    
     const modalRef = this.modalService.open(RecapitulatifCommandeComponent);
     modalRef.componentInstance.commande = commande;
     modalRef.result.then((result) => {
-      
-       console.log(1)
-       console.log(result)
-      
-    }, (reason) => {console.log(2)
+    }, (reason) => {
       console.log(reason)
     });
   }

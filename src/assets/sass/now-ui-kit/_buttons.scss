@@ -83,6 +83,7 @@
 // .btn-default { @include btn-styles($default-color, $default-states-color); }
 .btn-primary { @include btn-styles($primary-color, $primary-states-color); }
 .btn-green { @include btn-styles( rgba(112, 173, 71, 0.9),  rgba(112, 173, 71, 0.9)); }
+.btn-blue { @include btn-styles( rgba(44, 117, 255, 0.9),  rgba(44, 117, 255, 0.9)); }
 .btn-success { @include btn-styles($success-color, $success-states-color); }
 .btn-info    { @include btn-styles($info-color, $info-states-color); }
 .btn-warning { @include btn-styles($warning-color, $warning-states-color); }

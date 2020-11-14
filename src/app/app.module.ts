@@ -13,7 +13,6 @@ import {
 import { AppComponent } from './app.component';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { HammerModule } from '@angular/platform-browser';
-import { ModalComponent } from './modal/modal.component';
 import {  HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 
@@ -21,8 +20,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
     declarations: [
-        AppComponent,
-        ModalComponent
+        AppComponent
     ],
     imports: [
         ReactiveFormsModule,

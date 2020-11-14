@@ -138,8 +138,17 @@ p{
         }
     }
 
-    &.blockquote-white-perso{
+    &.blockquote-green-perso{
         border-color: rgba(3, 160, 98, 0.9);
+        color: black;
+
+        small{
+            color: black;
+        }
+    }
+
+    &.blockquote-white-perso{
+        border-color: rgba(44, 117, 255, 0.9);
         color: black;
 
         small{
